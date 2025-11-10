@@ -4,7 +4,7 @@ Recursively copies an object's properties onto a new object. For all new objects
 When [c]ObjDeepClone[/c] encounters an object that has been processed already, [c]ObjDeepClone[/c] assigns a reference to the copy of said object, instead of processing the object again.
 
 [color=#800000][size=165][b]Github link[/b][/size][/color]
-https://github.com/Nich-Cebolla/AutoHotkey-Object.Prototype.DeepClone
+https://github.com/Nich-Cebolla/AutoHotkey-ObjDeepClone
 
 [color=#800000][size=165][b]Parameters[/b][/size][/color]
 [list][*][color=#008000][b]{*}[/color] Self[/b] - The object to be deep cloned. If calling this method from an instance, exclude this parameter.
@@ -196,4 +196,3 @@ ObjDeepClone(Self, ConstructorParams?, Depth := 0) {
 [size=120][b]2025-02-08[/b][/size]
 [list][*]Uploaded library
 [*]A bit later, wrote DeepCloneEx and added it. Also separated [c]GetObjectFromString[/c] into its own file.[/list]
-

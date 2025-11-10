@@ -51,7 +51,7 @@ instance.A_Object.B1_Obj.C1_Obj.Example := instance.A_Object
 
 ConstructorParams := Map(Type(instance), [5, 6, , 8])
 
-new := instance.DeepClone(, ConstructorParams)
+new := ObjDeepClone(instance, ConstructorParams)
 
 ; To demonstrate that the new object is, indeed, new.
 _RecurseDelete(instance)

@@ -29,6 +29,9 @@ are set on the new object instead of attempting to clone them.
 
 ## Changelog
 
+2025-11-10
+- Renamed library to AutoHotkey-ObjDeepClone.
+
 2025-06-21
 - Fixed the initial depth.
 

@@ -1,24 +1,48 @@
 
-Object.Prototype.DefineProp('DeepClone', { Call: ObjDeepClone })
 /**
  * @description - Recursively copies an object's properties onto a new object. For all new objects,
  * `ObjDeepClone` attempts to set the new object's base to the same base as the subject. For objects
  * that inherit from `Map` or `Array`, clones the items in addition to the properties.
- * @param {*} Self - The object to be deep cloned. If calling this method from an instance,
+ *
+ * This does not deep clone property values that are objects that are not own properties of `Obj`.
+ * @example
+ * #include <ObjDeepClone>
+ * obj := []
+ * obj.prop := { prop: 'val' }
+ * superObj := []
+ * superObj.Base := obj
+ * clone := ObjDeepClone(superObj)
+ * clone.prop.newProp := 'new val'
+ * MsgBox(HasProp(superObj.prop, 'newProp')) ; 1
+ * @
+ *
+ * In the above example we see that the modification made to the object set to `obj.prop` is
+ * represented in the object on `superObj.prop`. That is because ObjDeepClone did not clone
+ * that object because that object exists on the base of `superObj`, which ObjDeepClone does not
+ * touch.
+ *
+ * @param {*} Obj - The object to be deep cloned. If calling this method from an instance,
  * exclude this parameter.
- * @param {Map} [ConstructorParams] - A map of constructor parameters, where the key is the class
- * name (use `ObjToBeCloned.__Class` as the key), and the value is an array of values that will be
- * passed to the constructor. Using `ConstructorParams` can allow `ObjDeepClone` to create correctly-
- * typed objects in cases where normally AHK will not allow setting the type using `ObjSetBase()`.
+ *
+ * @param {Map} [ConstructorParams] - This option is only needed when attempting to deep clone a class
+ * that requires parameters to create an instance of the class. You can see an example of this in
+ * file DeepClone-test2.ahk. For most objects like Map, Object, or Array, you can leave this unset.
+ *
+ * A map of constructor parameters, where the key is the class name (use `ObjToBeCloned.__Class`
+ * as the key), and the value is an array of values that will be passed to the constructor. Using
+ * `ConstructorParams` can allow `ObjDeepClone` to create correctly-typed objects in cases where
+ * normally AHK will not allow setting the type using `ObjSetBase()`.
+ *
  * @param {Integer} [Depth = 0] - The maximum depth to clone. A value equal to or less than 0 will
  * result in no limit.
+ *
  * @returns {*}
  */
-ObjDeepClone(Self, ConstructorParams?, Depth := 0) {
+ObjDeepClone(Obj, ConstructorParams?, Depth := 0) {
     GetTarget := IsSet(ConstructorParams) ? _GetTarget2 : _GetTarget1
-    PtrList := Map(ObjPtr(Self), Result := GetTarget(Self))
+    PtrList := Map(ObjPtr(Obj), Result := GetTarget(Obj))
     CurrentDepth := 0
-    return _Recurse(Result, Self)
+    return _Recurse(Result, Obj)
 
     _Recurse(Target, Subject) {
         CurrentDepth++

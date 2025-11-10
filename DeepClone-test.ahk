@@ -35,7 +35,7 @@ class TestObject {
 ; To demonstrate it successfully handles circular references.
 TestObject.A_Object.B1_Obj.C1_Obj.Example := TestObject.A_Object
 
-new := TestObject.DeepClone()
+new := ObjDeepClone(TestObject)
 
 ; To demonstrate that the new object is, indeed, new.
 _RecurseDelete(TestObject)
