@@ -32,8 +32,7 @@
  *
  * Use a maximum depth if there is a recursive parent-child relationship.
  *
- * @param {*} Obj - The object to be deep cloned. If calling this method from an instance,
- * exclude this parameter.
+ * @param {*} Obj - The object to be deep cloned.
  *
  * @param {Map} [ConstructorParams] - This option is only needed when attempting to deep clone a class
  * that requires parameters to create an instance of the class. You can see an example of this in
