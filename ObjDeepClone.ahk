@@ -21,6 +21,17 @@
  * that object because that object exists on the base of `superObj`, which ObjDeepClone does not
  * touch.
  *
+ * Be mindful of infinite recursion scenarios. This code will result in a critical error:
+ * @example
+ * obj1 := {}
+ * obj2 := {}
+ * obj1.obj2 := obj2
+ * obj2.obj1 := obj1
+ * clone := ObjDeepClone(obj1)
+ * @
+ *
+ * Use a maximum depth if there is a recursive parent-child relationship.
+ *
  * @param {*} Obj - The object to be deep cloned. If calling this method from an instance,
  * exclude this parameter.
  *
